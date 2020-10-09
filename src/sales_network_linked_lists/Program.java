@@ -16,8 +16,7 @@ public class Program {
 		s2.right = s1R1R1;
 		s2.left = s1R1;
 		
-
-		
+		s1R1R1.right = s1R2;
 
 		c1.sellerBalance2(s2);
 		

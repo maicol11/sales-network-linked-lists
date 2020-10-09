@@ -62,11 +62,12 @@ public class Companie {
 		
 		if(tmpRight != null) {
 			float rightCommission = 0;
-			while(tmpRight != null) {
+			while(tmpRight.right != null) {
 				rightCommission += (generalBalance*commissionProfitPercentaje) / 100;
 				tmpRight = tmpRight.right;
 			}
 			float tmpBalanceRight = generalBalance + rightCommission;
+			
 			balance += (tmpBalanceRight*25)/100;		
 		}
 		
