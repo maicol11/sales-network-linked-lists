@@ -5,6 +5,7 @@ public class Seller {
 	String name;
 	float totalSales;
 	Seller right;
+	Seller left;
 	
 	
 	Seller(String nameValue, float totalSalesValue) {
