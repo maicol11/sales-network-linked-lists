@@ -2,39 +2,18 @@ package sales_network_linked_lists;
 
 public class Companie {
 	String name;
-	String nit;
+	float membershipDiscountPercentaje;
+	float commissionProfitPercentaje;
+	float membershipInitialFee;
 	SellerList sellers;
 	
-	void showAllThree(Seller seller) {
-		SellerNode tmp = sellers.head;		
-			
-			while(tmp != null) {
-				Seller tmpRight = tmp.value.right;
-				while(tmpRight != null) {
-					if(tmp.value.right == seller) {
-						System.out.println("Los nombres de los venderons right son:");						
-						
-						if(tmpRight != null) {
-							System.out.println("Padre " + tmpRight.name);
-							
-							tmpRight = tmpRight.right;
-							
-							
-						}
-						
-						
-					}
-					System.out.println("	Nombre right: " + tmpRight.name);
-					tmpRight = tmpRight.right;
-				}
-				
-				
-				
-				tmp = tmp.next;
-			}
-		
-		
+	Companie(String v1, float v2, float v3, float v4) {
+		name 							= v1;
+		membershipDiscountPercentaje 	= v2;
+		commissionProfitPercentaje   	= v3;
+		membershipInitialFee		 	= v4;
 	}
+	
 	
 	void showAllFour(Seller seller) {
 		
