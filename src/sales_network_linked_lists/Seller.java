@@ -8,9 +8,9 @@ public class Seller {
 	Seller left;
 	
 	
-	Seller(String nameValue, float totalSalesValue) {
+	Seller(String nameValue) {
 		name = nameValue;
-		totalSales = totalSalesValue;
+
 	}
 	
 	

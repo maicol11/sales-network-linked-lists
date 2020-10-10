@@ -21,31 +21,10 @@ public class Companie {
 	}
 	
 	
-	
-	void sellerBalance(Seller seller) {
+	float sellerBalance2(Seller seller) {
 		
 		float generalBalance = membershipInitialFee - ((membershipInitialFee*membershipDiscountPercentaje) / 100);
-		Seller tmpRight = seller.right;
-		float balance = generalBalance;
-		float prueba = 0;
-		while(tmpRight != null) {
-			
-			balance += (generalBalance*commissionProfitPercentaje) / 100;
-			prueba += (generalBalance*commissionProfitPercentaje) / 100;
-			System.out.println("prueba: " + prueba);
-			tmpRight = tmpRight.right;
-			
-		}
 		
-		System.out.println(seller.name + "'s balance " + balance);		
-	}
-	
-	
-	
-	void sellerBalance2(Seller seller) {
-		
-		float generalBalance = membershipInitialFee - ((membershipInitialFee*membershipDiscountPercentaje) / 100);
-		Seller tmpRight = seller.right;
 		float balance = generalBalance;
 
 		
@@ -60,6 +39,7 @@ public class Companie {
 			balance += (tmpBalance*25)/100;		
 		}
 		
+		Seller tmpRight = seller.right;
 		if(tmpRight != null) {
 			float rightCommission = 0;
 			while(tmpRight.right != null) {
@@ -71,8 +51,137 @@ public class Companie {
 			balance += (tmpBalanceRight*25)/100;		
 		}
 		
-		System.out.println(seller.name + "'s balance " + balance);		
+		return balance;	
 	}
+	
+	void totalBalance(Seller seller) {
+		
+		float balance = sellerBalance2(seller);	
+		Seller tmpright = seller.right;
+		float balance2 = 0;
+		while(tmpright != null) {
+			balance2 += sellerBalance2(tmpright);
+			tmpright = tmpright.right;	
+		}
+		
+		Seller tmpleft = seller.left;
+		float balance3 = 0;
+		while(tmpleft != null) {
+			balance3 += sellerBalance2(tmpleft);
+			
+			tmpleft = tmpleft.left;
+		}
+		float total = balance + balance2 + balance3;
+		
+		System.out.println("total: " + total);
+		
+	}
+	
+	float biggerBalance(Seller seller) {
+		
+		float balance = sellerBalance2(seller);
+		
+		Seller tmpright = seller.right;
+		
+		float balance2 = 0;
+		float tmp = balance;
+		while(tmpright != null) {
+			float balancetmp = sellerBalance2(tmpright);
+			
+			if(balancetmp > tmp ) {
+				
+				tmp = balancetmp;
+			}
+			tmpright = tmpright.right;
+			
+		}
+		
+		Seller tmpleft = seller.left;
+
+		while(tmpleft != null) {
+			float balance3 = sellerBalance2(tmpleft);
+			if(balance3 > tmp ) {
+				
+				tmp = balance3;
+			}
+			tmpleft = tmpleft.left;
+			
+		}
+
+		
+		return tmp;
+		
+	}
+	
+	float smallBalance(Seller seller) {
+		
+		float balance = sellerBalance2(seller);
+		
+		Seller tmpright = seller.right;
+
+		float tmp = balance;
+		while(tmpright != null) {
+			float balancetmp = sellerBalance2(tmpright);
+			
+			if(balancetmp < tmp ) {
+				
+				tmp = balancetmp;
+			}
+			tmpright = tmpright.right;
+			
+		}
+		
+		Seller tmpleft = seller.left;
+
+		while(tmpleft != null) {
+			float balance3 = sellerBalance2(tmpleft);
+			if(balance3 > tmp ) {
+				
+				tmp = balance3;
+			}
+			tmpleft = tmpleft.left;
+			
+		}
+
+		return tmp;
+		
+	}
+	
+	void allNetworkBiggerBalance() {
+		SellerNode tmp = sellers.head;
+		
+		float bigger = 0;
+		while(tmp != null) {
+			float prueba = biggerBalance(tmp.value);
+			if(prueba > bigger) {
+				bigger = prueba;
+				
+			}
+			
+			tmp = tmp.next;
+		}
+		
+		System.out.println("Balance mayor: " + bigger);
+	}
+	
+	void allNetWorkSmallerBalance() {
+		SellerNode tmp = sellers.head;
+		
+		float small = smallBalance(tmp.value);
+		while(tmp != null) {
+			float prueba = smallBalance(tmp.value);
+			if(prueba < small) {
+				small = prueba;
+				
+			}
+			
+			tmp = tmp.next;
+		}
+		
+		System.out.println("Balance menor: " + small);
+	}
+	
+	
 	
 	
 }
